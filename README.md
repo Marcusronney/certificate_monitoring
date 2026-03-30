@@ -13,7 +13,7 @@ Exemplo:
 openssl s_client -servername www.site.com -connect www.site.com:443
 ````
 
-
+----------------------
 
 ## Estrutura
 
@@ -42,6 +42,7 @@ Script termina
 Container morre (--rm)
 ````
 
+---------------------------------
 
 Arquivo de senhas
 ````
@@ -59,20 +60,20 @@ Permissão
 chmod 600 /cert-monitor/secrets/pfx_passwords
 ````
 
-
+----------------------
 
 
 ### Crontab
 
 O Container será executado a cada 6h, ele irá ser criado, listar os certificados, enviar as métricas e morrer.
 
-````
+`````
 crontab -e
 `````
 
 `````
 0 8 * * * cd /cert-monitor && docker compose run --rm cert-monitor >/dev/null 2>&1
-````
+`````
 
 
 Subindo o container
@@ -90,9 +91,14 @@ zabbix_sender -vv \
   -o '{"data":[{"{#NOMECERT}":"3f2024.pfx"}]}'
 ````
 
+
+![LLD](image/inicia_lld.png)
+
+-----------------------------------
+
 ## Zabbix
 
-Teste Manual
+Teste a coleta dos itens manualmente com o Zabbix Sender.
 ````
 zabbix_sender -z 192.168.0.40 -s cert-monitor-local -k "cert.days_left[Nome_do_Certificado.pfx]" -o -308
 zabbix_sender -z 192.168.0.40 -s cert-monitor-local -k "cert.expiry_ts[Nome_do_Certificado.pfx]" -o 1716310598
@@ -105,7 +111,6 @@ zabbix_sender -z 192.168.0.40 -s cert-monitor-local -k "cert.status[Nome_do_Cert
 zabbix_sender -z 192.168.0.40 -s cert-monitor-local -k "cert.error[Nome_do_Certificado.pfx]" -o ""
 ````
 
-
 ![Teste Manual](image/testemanual.png)
 
 Front do Zabbix
@@ -116,3 +121,4 @@ Front do Zabbix
 
 # Grafana - Dashboard
 
+![Zabbix](image/image/card_grafana.png
