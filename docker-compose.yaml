@@ -1,0 +1,24 @@
+services:
+  cert-monitor:
+    build: .
+    container_name: cert-monitor
+    restart: unless-stopped
+    environment:
+      ZABBIX_SERVER: "IP_do_seu_server"
+      ZABBIX_HOST: "cert-monitor-local"
+      TZ: "America/Sao_Paulo"
+    volumes:
+      - /home/DOCKER/CERT:/certs:ro
+    secrets:
+      - pfx_passwords
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+secrets:
+  pfx_passwords:
+    file: ./secrets/pfx_passwords
