@@ -42,6 +42,8 @@ Script termina
 Container morre (--rm)
 ````
 
+![Fluxo](image/Pipeline.png)
+
 ---------------------------------
 
 Arquivo de senhas
