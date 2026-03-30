@@ -121,4 +121,4 @@ Front do Zabbix
 
 # Grafana - Dashboard
 
-![Zabbix](image/card_grafana.png
+![Zabbix](image/card_grafana.png)
