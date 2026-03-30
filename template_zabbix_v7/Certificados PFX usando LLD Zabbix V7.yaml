@@ -1,0 +1,171 @@
+zabbix_export:
+  version: '7.4'
+  template_groups:
+    - uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    - uuid: 1ee88405f8b8496a94510314f8d2ad86
+      template: 'Certificados PFX usando LLD'
+      name: 'Certificados PFX usando LLD'
+      description: |
+        Certificados PFX usando LLD
+        
+        Criado por: Marcus Rônney
+        
+        Linkedin:https://www.linkedin.com/in/marcus-r%C3%B4nney-627657bb/
+        Github:https://github.com/Marcusronney
+        E-mail: marcusronney@outlook.com
+      groups:
+        - name: Templates
+      discovery_rules:
+        - uuid: 5da95550795843ac980bf0d6833514bf
+          name: 'Descobrindo Certificados em formato PFX'
+          type: TRAP
+          key: cert.discovery
+          item_prototypes:
+            - uuid: c548cdd2c3c04df6969d1f5d05d93c56
+              name: '{#NOMECERT} -  Tempo desde emissão'
+              type: TRAP
+              key: 'cert.age_days[{#NOMECERT}]'
+              trends: '0'
+              units: Dias
+              description: 'Tempo desde emissão'
+            - uuid: b6f4c3343f0749559846ce403db97a53
+              name: '{#NOMECERT} -  cadeia'
+              type: TRAP
+              key: 'cert.chain_length[{#NOMECERT}]'
+              value_type: TEXT
+              description: cadeia
+            - uuid: b3127c41d8254cdcb2880d5db9e01307
+              name: '{#NOMECERT} - CA raiz e cadeia'
+              type: TRAP
+              key: 'cert.chain_valid[{#NOMECERT}]'
+              value_type: TEXT
+              description: 'CA raiz e cadeia'
+            - uuid: 74178c1870e64d18b7b31101eff4cffb
+              name: '{#NOMECERT} - CNPJ'
+              type: TRAP
+              key: 'cert.cnpj[{#NOMECERT}]'
+              value_type: TEXT
+              description: 'CNPJ que pertence o certificado'
+            - uuid: c13dfef8131742699677d6f072bc5a0f
+              name: '{#NOMECERT} - dias restantes do certificado'
+              type: TRAP
+              key: 'cert.days_left[{#NOMECERT}]'
+              value_type: FLOAT
+              units: Dias
+              trigger_prototypes:
+                - uuid: eee1d5b4a916405fa948581af82d73da
+                  expression: 'last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])>=0 and last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])<7'
+                  name: 'Certificado {#NOMECERT} expira em 7 dias'
+                  priority: HIGH
+                - uuid: 697413f44f474cc28e7f869d17f06916
+                  expression: 'last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])>=7 and last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])<30'
+                  name: 'Certificado {#NOMECERT} expira em 30 dias'
+                  priority: HIGH
+                - uuid: cd107594d991416ca0b5d60c7449833e
+                  expression: 'last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])>=30 and last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])<60'
+                  name: 'Certificado {#NOMECERT} expira em 60 dias'
+                  priority: INFO
+                - uuid: 6c7c2c5b70b549f88540477f986cd239
+                  expression: 'last(/Certificados PFX usando LLD/cert.days_left[{#NOMECERT}])=0'
+                  name: 'Certificado {#NOMECERT} foi expirado'
+                  priority: DISASTER
+            - uuid: f34057da84d8496498e3ae9828841ca1
+              name: '{#NOMECERT} - erro'
+              type: TRAP
+              key: 'cert.error[{#NOMECERT}]'
+              value_type: TEXT
+              description: 'Erro na leitura do cert'
+            - uuid: c6b38fe521d74370abfe74e0f4a86f49
+              name: '{#NOMECERT} - expiração timestamp'
+              type: TRAP
+              key: 'cert.expiry_ts[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: 0715c66f0c334b16b44699baead62a27
+              name: '{#NOMECERT} - issuer'
+              type: TRAP
+              key: 'cert.issuer[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: 1f3ea63d039d45548708be37ad756a49
+              name: '{#NOMECERT} - Criptografia'
+              type: TRAP
+              key: 'cert.key_bits[{#NOMECERT}]'
+              units: Dias
+              description: |
+                RSA 2048
+                RSA 1024 (INSEGURO ⚠️)
+            - uuid: 3103a5fb6a4f4519b92fa95e00ce4c28
+              name: '{#NOMECERT} - Fim da validade'
+              type: TRAP
+              key: 'cert.not_after[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: 162074cdf2204bf5a9ae1306c135d9fa
+              name: '{#NOMECERT} - Inicio da validade'
+              type: TRAP
+              key: 'cert.not_before[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: adb09a9c79014440944d66c750899522
+              name: '{#NOMECERT} - Serial'
+              type: TRAP
+              key: 'cert.serial[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: 0b3bae442fbd4aac9b5c294cc8fcc1b1
+              name: '{#NOMECERT} - sha256'
+              type: TRAP
+              key: 'cert.sha256[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: 3b6c5853948c413395fcbdd2e2d39cc1
+              name: '{#NOMECERT} - status'
+              type: TRAP
+              key: 'cert.status[{#NOMECERT}]'
+              description: |
+                0 = OK
+                1 = certificado não encontrado
+                2 = senha não encontrada
+                3 = falha ao abrir PFX
+                4 = falha ao extrair campos
+              preprocessing:
+                - type: REGEX
+                  parameters:
+                    - '0'
+                    - OK
+                - type: REGEX
+                  parameters:
+                    - '1'
+                    - 'certificado não encontrado'
+                - type: REGEX
+                  parameters:
+                    - '2'
+                    - 'certificado não encontrado'
+                - type: REGEX
+                  parameters:
+                    - '3'
+                    - 'falha ao abrir PFX'
+                - type: REGEX
+                  parameters:
+                    - '4'
+                    - 'falha ao extrair campos'
+            - uuid: 6ffc04f175f74ab38e59a8a3ab42b4bf
+              name: '{#NOMECERT} - subject'
+              type: TRAP
+              key: 'cert.subject[{#NOMECERT}]'
+              value_type: TEXT
+            - uuid: 3d875c2b9f0643bca16eaf4d647a50b1
+              name: '{#NOMECERT} - Tipo'
+              type: TRAP
+              key: 'cert.type[{#NOMECERT}]'
+              value_type: TEXT
+              description: |
+                Tipo do certificado, OU = RFB e-CNPJ A1
+                
+                Exemplo:
+                
+                e-CNPJ A1
+                SSL/TLS
+                Code Signing
+            - uuid: 4a830e28cc6042c9a4dc4d54b05d53ad
+              name: '{#NOMECERT} - Versão do Certificado'
+              type: TRAP
+              key: 'cert.version[{#NOMECERT}]'
+              units: Dias

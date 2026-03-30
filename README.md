@@ -6,22 +6,30 @@ Monitorando validade de certificados A1 LLD, container Docker executando script 
 
 Crontab → Docker → Script (OpenSSL) → Certificados → Zabbix → Grafana → HTML Cards
 
+Dependências: OpenSSL
+
+Exemplo:
+````
+openssl s_client -servername www.site.com -connect www.site.com:443
+````
+
 
 
 ## Estrutura
 
 ````
 cert-monitor/
-├── certs/
+├── certs/                  # Certificados .pfx
 ├── scripts/
+│   └── send_certs.sh       # Script para coleta e envio ao Zabbix
 ├── docker/
-└── README.md
+│   └── Dockerfile          # Container do monitor
 ````
 
 ### FLUXO:
 
 ````
-CRON dispara
+CRON executa o container
    ↓
 Docker cria container
    ↓
@@ -56,6 +64,8 @@ chmod 600 /cert-monitor/secrets/pfx_passwords
 
 ### Crontab
 
+O Container será executado a cada 6h, ele irá ser criado, listar os certificados, enviar as métricas e morrer.
+
 ````
 crontab -e
 `````
@@ -65,7 +75,22 @@ crontab -e
 ````
 
 
+Subindo o container
+````
+cd /DOCKER/cert-monitor
+docker compose up -d --build
+````
 
+Subindo LLD cert.discovery
+````
+zabbix_sender -vv \
+  -z 192.168.0.40 \
+  -s cert-monitor-local \
+  -k cert.discovery \
+  -o '{"data":[{"{#NOMECERT}":"3f2024.pfx"}]}'
+````
+
+## Zabbix
 
 Teste Manual
 ````
@@ -81,15 +106,13 @@ zabbix_sender -z 192.168.0.40 -s cert-monitor-local -k "cert.error[Nome_do_Certi
 ````
 
 
-Subindo LLD cert.discovery
-````
-zabbix_sender -vv \
-  -z 192.168.0.40 \
-  -s cert-monitor-local \
-  -k cert.discovery \
-  -o '{"data":[{"{#NOMECERT}":"3f2024.pfx"}]}'
-````
+![Teste Manual](image/testemanual.png)
+
+Front do Zabbix
+
+![Zabbix](image/zabbix.png)
 
 
 
+# Grafana - Dashboard
 

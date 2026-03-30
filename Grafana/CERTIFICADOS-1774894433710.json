@@ -1,0 +1,893 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE",
+      "label": "alexanderzobnin-zabbix-datasource",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "alexanderzobnin-zabbix-datasource",
+      "pluginName": "Zabbix"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "alexanderzobnin-zabbix-datasource",
+      "name": "Zabbix",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "gapit-htmlgraphics-panel",
+      "name": "HTML graphics",
+      "version": "2.1.1"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.6"
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": false,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "SVGBaseFix": true,
+        "add100Percentage": true,
+        "calcsMutation": "standard",
+        "centerAlignContent": true,
+        "codeData": "{\n  \"text\": \"Random text\"\n}",
+        "css": "body {\n  margin: 0;\n  padding: 0;\n  font-family: Arial, sans-serif;\n  background-color: #f0f0f0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n}\n\n.adapted-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: linear-gradient(to right, #083138, #004f6b);\n  padding: 17px;\n  border-radius: 15px;\n  width: 100%;\n  height: 80%;\n  box-sizing: border-box;\n}\n\n\n.adapted-content {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n}\n\n.adapted-value-container {\n  display: flex;\n    align-items: center;\n  flex-direction: column;\n  align-items: center; /* Alinha o conteúdo à direita */\n  justify-content: center;\n  width: 100%;\n  position: relative; /* Necessário para o alinhamento vertical */\n}\n\n\n\n.adapted-name {\n  color: #FFFFFF;\n  font-weight: bold;\n    align-items: center;\n  font-size: 25px;\n  margin-top: 5px; /* Espaçamento entre o valor e o texto */\n  animation: text-glow 1.5s ease-in-out infinite alternate; /* Adiciona animação pulsando indo e voltando */\n}\n\n.adapted-value {\n  color: #FFFFFF;\n  font-weight: bold;\n    align-items: center;\n  font-size: 25px;\n  margin-top: 5px; /* Espaçamento entre o valor e o texto */\n  animation: text-glow 1.5s ease-in-out infinite alternate; /* Adiciona animação pulsando indo e voltando */\n}\n\n@keyframes text-glow {\n  from {\n    text-shadow: 0 0 1px #56d5dc, 0 0 1px #56d5dc, 0 0 7px #56d5dc, 0 0 30px #56d5dc;\n  }\n  to {\n    text-shadow: 0 1 10px #56d5dc, 0 0 2px #56d5dc, 0 0 30px #56d5dc, 0 0 40px #56d5dc;\n  }\n}\n\n/* Consultas de mídia para dispositivos móveis */\n@media (max-width: 600px) {\n  .adapted-container {\n    flex-direction: column;\n    align-items: flex-start;\n    width: 100%;\n  }\n\n  .adapted-image {\n    width: 30px;\n    height: 35px;\n    margin-right: 0;\n    margin-bottom: 10px;\n  }\n\n\n",
+        "dynamicData": false,
+        "dynamicFieldDisplayValues": false,
+        "dynamicHtmlGraphics": false,
+        "dynamicProps": false,
+        "html": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n\n<body>\n  <div class=\"adapted-container\">\n    <div class=\"adapted-content\">\n      <div class=\"adapted-value-container\">\n        <span class=\"adapted-name\">CERTIFICADOS</span>\n       \n      </div>\n    </div>\n  </div>\n</body>\n\n</html>",
+        "onInit": "// Sets the text from customProperties\nconst htmlgraphicsText = htmlNode.getElementById('htmlgraphics-text');\n\nif (htmlgraphicsText) {\n  htmlgraphicsText.textContent = customProperties.text;\n\n  // Change the text color based on the theme\n  if (theme.isDark) {\n    htmlgraphicsText.style.color = 'green';\n  } else {\n    htmlgraphicsText.style.color = 'red';\n  }\n}\n",
+        "onInitOnResize": false,
+        "onRender": "// Sets the value from the first series on every refresh\nconst htmlgraphicsValue = htmlNode.getElementById('htmlgraphics-value');\n\nif (htmlgraphicsValue) {\n  const valueField = data.series[0]?.fields[1];\n  if (valueField) {\n    const length = valueField.values.length;\n    htmlgraphicsValue.textContent = valueField.values.get(length - 1);\n  } else {\n    htmlgraphicsValue.textContent = \"No data\"\n  }\n}\n",
+        "overflow": "visible",
+        "panelupdateOnMount": true,
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull",
+            "last",
+            "firstNotNull",
+            "first",
+            "min",
+            "max",
+            "mean",
+            "sum",
+            "count",
+            "range",
+            "delta",
+            "step",
+            "diff",
+            "logmin",
+            "allIsZero",
+            "allIsNull",
+            "diffperc"
+          ]
+        },
+        "renderOnMount": true,
+        "rootCSS": "body {\r\n  background: linear-gradient(135deg, #012126, #000d12, #001b02);\r\n  background-size: 400% 400%;\r\n  animation: gradientBG 15s ease infinite;\r\n  font-family: Arial, sans-serif;\r\n\r\n}\r\n\r\n@keyframes gradientBG {\r\n  0% {\r\n    background-position: 0% 50%;\r\n  }\r\n  50% {\r\n    background-position: 100% 50%;\r\n  }\r\n  100% {\r\n    background-position: 0% 50%;\r\n  }\r\n}\r\n",
+        "useGrafanaScrollbar": true
+      },
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "host": {
+            "filter": ""
+          },
+          "item": {
+            "filter": ""
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "gapit-htmlgraphics-panel"
+    },
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+      },
+      "description": "Vida total = Tempo desde emissão + Dias restantes\nVida consumida = (Tempo desde emissão / Vida total) * 100",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 2,
+      "options": {
+        "SVGBaseFix": true,
+        "add100Percentage": true,
+        "calcsMutation": "standard",
+        "centerAlignContent": true,
+        "codeData": "{\n  \"text\": \"Random text\"\n}",
+        "css": "* {\n  box-sizing: border-box;\n  font-family: Inter, Arial, sans-serif;\n}\n\n.cards-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));\n  gap: 10px;\n  width: 100%;\n  padding: 8px;\n}\n\n.cert-card {\n  border-radius: 18px;\n  background: linear-gradient(180deg, rgba(26, 69, 77, 0.96), rgba(7, 21, 22, 0.96));\n  border: 1px solid rgba(255,255,255,0.08);\n  box-shadow: 0 8px 24px rgba(73, 73, 73, 0.35);\n  color: #e5e7eb;\n  padding: 18px;\n}\n\n.cert-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: flex-start;\n  gap: 12px;\n  margin-bottom: 18px;\n}\n\n.cert-title {\n  font-size: 24px;\n  font-weight: 700;\n  line-height: 1.1;\n}\n\n.cert-subtitle {\n  margin-top: 4px;\n  color: #9ca3af;\n  font-size: 10px;\n}\n\n.badge {\n  padding: 8px 14px;\n  border-radius: 999px;\n  font-size: 12px;\n  font-weight: 700;\n  border: 1px solid rgba(255,255,255,0.1);\n  background: rgba(255,255,255,0.05);\n  color: #e5e7eb;\n  white-space: nowrap;\n}\n\n.badge-ok {\n  color: #8af686;\n  background: rgba(102, 167, 126, 0.16);\n}\n\n.badge-warning {\n  color: #fde68a;\n  background: rgba(245,158,11,0.16);\n}\n\n.badge-critical {\n  color: #451c1c;\n  background: rgba(255, 22, 22, 0.846);\n}\n\n.timeline-labels {\n  display: flex;\n  justify-content: space-between;\n  font-size: 12px;\n  color: #9ca3af;\n}\n\n.timeline-labels.top {\n  margin-bottom: 5px;\n  text-transform: uppercase;\n}\n\n.timeline-labels.bottom {\n  margin-top: 1px;\n  color: #e5e7eb;\n  font-weight: 600;\n}\n\n.timeline {\n  position: relative;\n  height: 36px;\n  display: flex;\n  align-items: center;\n}\n\n.timeline-base {\n  width: 100%;\n  height: 10px;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.08);\n  position: absolute;\n}\n\n.timeline-progress {\n  height: 10px;\n  border-radius: 999px;\n  position: absolute;\n  left: 0;\n}\n\n.timeline-point {\n  position: absolute;\n  width: 18px;\n  height: 18px;\n  border-radius: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  border: 3px solid #111827;\n  z-index: 2;\n}\n\n.timeline-point.start {\n  left: 0%;\n  background: #60a5fa;\n}\n\n.timeline-point.now {\n  background: #f8fafc;\n  box-shadow: 0 0 0 6px rgba(255,255,255,0.08);\n}\n\n.timeline-point.end {\n  left: 100%;\n  background: #a78bfa;\n}\n\n.metrics {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 5px;\n  margin-top: 12px;\n}\n\n.metric {\n  padding: 14px;\n  border-radius: 14px;\n  background: rgba(255,255,255,0.04);\n  border: 1px solid rgba(255,255,255,0.05);\n}\n\n.metric-label {\n  display: block;\n  font-size: 10px;\n  color: #9ca3af;\n  margin-bottom: 8px;\n  text-transform: uppercase;\n}\n\n.metric strong {\n  font-size: 16px;\n  color: #f9fafb;\n}\n\n\n\n\n\n.detail-label {\n  font-size: 10px;\n  color: #9ca3af;\n  margin-bottom: 8px;\n  text-transform: uppercase;\n}\n\n.details {\n  margin-top: 4px;\n  display: flex;\n  justify-content: center;\n}",
+        "dynamicData": false,
+        "dynamicFieldDisplayValues": false,
+        "dynamicHtmlGraphics": false,
+        "dynamicProps": false,
+        "html": "<div id=\"cardsContainer\" class=\"cards-grid\"></div>\n\n",
+        "onInit": "// Sets the text from customProperties\nconst htmlgraphicsText = htmlNode.getElementById('htmlgraphics-text');\n\nif (htmlgraphicsText) {\n  htmlgraphicsText.textContent = customProperties.text;\n\n  // Change the text color based on the theme\n  if (theme.isDark) {\n    htmlgraphicsText.style.color = 'green';\n  } else {\n    htmlgraphicsText.style.color = 'red';\n  }\n}\n",
+        "onInitOnResize": false,
+        "onRender": "function normalizeText(text) {\r\n  return String(text || \"\")\r\n    .toLowerCase()\r\n    .normalize(\"NFD\")\r\n    .replace(/[\\u0300-\\u036f]/g, \"\")\r\n    .replace(/\\s+/g, \" \")\r\n    .trim();\r\n}\r\n\r\nfunction getSeriesList() {\r\n  return htmlGraphics?.data?.series || data?.series || [];\r\n}\r\n\r\nfunction getLastFieldValue(field) {\r\n  if (!field) return null;\r\n\r\n  if (field.state?.calcs?.last !== undefined && field.state?.calcs?.last !== null) {\r\n    return field.state.calcs.last;\r\n  }\r\n\r\n  if (field.values?.buffer?.length) {\r\n    return field.values.buffer[field.values.buffer.length - 1];\r\n  }\r\n\r\n  if (Array.isArray(field.values) && field.values.length) {\r\n    return field.values[field.values.length - 1];\r\n  }\r\n\r\n  return null;\r\n}\r\n\r\nfunction getValueField(series) {\r\n  if (!series?.fields?.length) return null;\r\n\r\n  for (const field of series.fields) {\r\n    const fieldName = normalizeText(field.name);\r\n    if (fieldName === \"value\" || fieldName === \"last\" || fieldName === \"valor\") {\r\n      return field;\r\n    }\r\n  }\r\n\r\n  return series.fields[1] || series.fields[0] || null;\r\n}\r\n\r\nfunction splitMetricName(seriesName) {\r\n  const raw = String(seriesName || \"\").trim();\r\n  const match = raw.match(/^(.*?)\\s*-\\s*(.+)$/);\r\n\r\n  if (!match) {\r\n    return { certName: \"\", metricName: \"\" };\r\n  }\r\n\r\n  return {\r\n    certName: match[1].trim(),\r\n    metricName: match[2].trim()\r\n  };\r\n}\r\n\r\nfunction normalizeCertName(certName) {\r\n  return String(certName || \"\").replace(/\\s+/g, \" \").trim();\r\n}\r\n\r\nfunction isValidCertName(certName) {\r\n  const raw = normalizeCertName(certName);\r\n  const normalized = normalizeText(raw);\r\n\r\n  if (!raw) return false;\r\n  if (!normalized.endsWith(\".pfx\")) return false;\r\n  if (normalized === \".pfx\") return false;\r\n\r\n  if (\r\n    normalized.includes(\"value\") ||\r\n    normalized.includes(\"time\") ||\r\n    normalized.includes(\"series\")\r\n  ) {\r\n    return false;\r\n  }\r\n\r\n  return true;\r\n}\r\n\r\nfunction mapMetricKey(metricName) {\r\n  const m = normalizeText(metricName);\r\n\r\n  if (m.includes(\"dias restantes do certificado\")) return \"remainingDays\";\r\n  if (m.includes(\"tempo desde emissao\")) return \"elapsedDays\";\r\n  if (m.includes(\"inicio da validade\")) return \"startDate\";\r\n  if (m.includes(\"fim da validade\")) return \"endDate\";\r\n  if (m === \"status\" || m.includes(\"status\")) return \"status\";\r\n  if (m === \"tipo\" || m.includes(\"tipo\")) return \"tipo\";\r\n\r\n  return null;\r\n}\r\n\r\nfunction buildCertificates() {\r\n  const certificates = {};\r\n\r\n  for (const series of getSeriesList()) {\r\n    const { certName, metricName } = splitMetricName(series.name);\r\n    const normalizedCertName = normalizeCertName(certName);\r\n    const metricKey = mapMetricKey(metricName);\r\n\r\n    if (!metricKey || !isValidCertName(normalizedCertName)) {\r\n      continue;\r\n    }\r\n\r\n    if (!certificates[normalizedCertName]) {\r\n      certificates[normalizedCertName] = {\r\n        certName: normalizedCertName,\r\n        remainingDays: null,\r\n        elapsedDays: null,\r\n        startDate: null,\r\n        endDate: null,\r\n        status: null,\r\n        tipo: null\r\n      };\r\n    }\r\n\r\n    const field = getValueField(series);\r\n    const value = getLastFieldValue(field);\r\n\r\n    certificates[normalizedCertName][metricKey] = value;\r\n  }\r\n\r\n  return Object.values(certificates).filter(cert => {\r\n    return (\r\n      cert.certName &&\r\n      isValidCertName(cert.certName) &&\r\n      (\r\n        cert.remainingDays !== null ||\r\n        cert.elapsedDays !== null ||\r\n        cert.startDate !== null ||\r\n        cert.endDate !== null ||\r\n        cert.status !== null ||\r\n        cert.tipo !== null\r\n      )\r\n    );\r\n  });\r\n}\r\n\r\nfunction formatNumber(value, suffix = \"\") {\r\n  if (value === null || value === undefined || value === \"\" || Number.isNaN(Number(value))) {\r\n    return \"--\";\r\n  }\r\n  return `${Number(value)}${suffix}`;\r\n}\r\n\r\nfunction formatText(value) {\r\n  if (value === null || value === undefined || value === \"\") {\r\n    return \"--\";\r\n  }\r\n  return String(value);\r\n}\r\n\r\nfunction formatDate(value) {\r\n  if (value === null || value === undefined || value === \"\") return \"--\";\r\n\r\n  const asNumber = Number(value);\r\n  if (!Number.isNaN(asNumber) && String(value).trim() !== \"\") {\r\n    const epochDate = new Date(asNumber * 1000);\r\n    if (!Number.isNaN(epochDate.getTime())) {\r\n      return epochDate.toLocaleDateString(\"pt-BR\");\r\n    }\r\n  }\r\n\r\n  const date = new Date(value);\r\n  if (!Number.isNaN(date.getTime())) {\r\n    return date.toLocaleDateString(\"pt-BR\");\r\n  }\r\n\r\n  return String(value);\r\n}\r\n\r\nfunction getBadgeInfo(statusText, remainingDays) {\r\n  const status = normalizeText(statusText);\r\n  const remaining = Number(remainingDays);\r\n\r\n  if (\r\n    status.includes(\"expired\") ||\r\n    status.includes(\"expirado\") ||\r\n    status.includes(\"erro\") ||\r\n    (!Number.isNaN(remaining) && remaining < 0)\r\n  ) {\r\n    return { text: \"Crítico\", className: \"badge badge-critical\" };\r\n  }\r\n\r\n  if (!Number.isNaN(remaining) && remaining <= 30) {\r\n    return { text: \"Atenção\", className: \"badge badge-warning\" };\r\n  }\r\n\r\n  return { text: \"Saudável\", className: \"badge badge-ok\" };\r\n}\r\n\r\nfunction getProgressInfo(elapsedDays, totalDays) {\r\n  const elapsed = Number(elapsedDays);\r\n  const total = Number(totalDays);\r\n\r\n  if (Number.isNaN(elapsed) || Number.isNaN(total) || total <= 0) {\r\n    return { percent: 0, color: \"#22c55e\" };\r\n  }\r\n\r\n  let percent = (elapsed / total) * 100;\r\n  if (percent < 0) percent = 0;\r\n  if (percent > 100) percent = 100;\r\n\r\n  let color = \"#22c55e\";\r\n  if (percent >= 90) {\r\n    color = \"#ef4444\";\r\n  } else if (percent >= 70) {\r\n    color = \"#f59e0b\";\r\n  }\r\n\r\n  return { percent, color };\r\n}\r\n\r\nfunction renderCard(cert) {\r\n  let totalDays = null;\r\n  if (cert.elapsedDays !== null && cert.remainingDays !== null) {\r\n    totalDays = Number(cert.elapsedDays) + Number(cert.remainingDays);\r\n  }\r\n\r\n  let usedPercent = null;\r\n  if (totalDays !== null && Number(totalDays) > 0 && cert.elapsedDays !== null) {\r\n    usedPercent = (Number(cert.elapsedDays) / Number(totalDays)) * 100;\r\n  }\r\n\r\n  const badge = getBadgeInfo(cert.status, cert.remainingDays);\r\n  const progress = getProgressInfo(cert.elapsedDays, totalDays);\r\n  const nowDate = new Date().toLocaleDateString(\"pt-BR\");\r\n\r\n  return `\r\n    <div class=\"cert-card\">\r\n      <div class=\"cert-header\">\r\n        <div>\r\n          <div class=\"cert-title\">${formatText(cert.certName)}</div>\r\n          <div class=\"cert-subtitle\">Tempo de vida do certificado</div>\r\n        </div>\r\n        <div class=\"${badge.className}\">${badge.text}</div>\r\n      </div>\r\n\r\n      <div class=\"timeline-labels top\">\r\n        <span>Início</span>\r\n        <span>Agora</span>\r\n        <span>Expiração</span>\r\n      </div>\r\n\r\n      <div class=\"timeline\">\r\n        <div class=\"timeline-base\"></div>\r\n        <div class=\"timeline-progress\" style=\"width:${progress.percent}%; background:${progress.color};\"></div>\r\n        <div class=\"timeline-point start\"></div>\r\n        <div class=\"timeline-point now\" style=\"left:${progress.percent}%;\"></div>\r\n        <div class=\"timeline-point end\"></div>\r\n      </div>\r\n\r\n      <div class=\"timeline-labels bottom\">\r\n        <span>${formatDate(cert.startDate)}</span>\r\n        <span>${nowDate}</span>\r\n        <span>${formatDate(cert.endDate)}</span>\r\n      </div>\r\n\r\n      <div class=\"metrics\">\r\n        <div class=\"metric\">\r\n          <span class=\"metric-label\">Vida consumida</span>\r\n          <strong>${usedPercent === null ? \"--\" : usedPercent.toFixed(1) + \"%\"}</strong>\r\n        </div>\r\n        <div class=\"metric\">\r\n          <span class=\"metric-label\">Dias restantes</span>\r\n          <strong>${formatNumber(cert.remainingDays, \" dias\")}</strong>\r\n        </div>\r\n        <div class=\"metric\">\r\n          <span class=\"metric-label\">Tempo desde emissão</span>\r\n          <strong>${formatNumber(cert.elapsedDays, \" dias\")}</strong>\r\n        </div>\r\n        <div class=\"metric\">\r\n          <span class=\"metric-label\">Vida total</span>\r\n          <strong>${formatNumber(totalDays, \" dias\")}</strong>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"details\">\r\n        <div class=\"detail\">\r\n          <span class=\"detail-label\">Tipo = </span>\r\n          <span class=\"detail-value\">${formatText(cert.tipo)}</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  `;\r\n}\r\n\r\nfunction render() {\r\n  const container = htmlNode.querySelector(\"#cardsContainer\");\r\n  if (!container) return;\r\n\r\n  const certs = buildCertificates();\r\n\r\n  if (!certs.length) {\r\n    container.innerHTML = `<div class=\"cert-card\">Nenhum certificado encontrado nas séries do painel.</div>`;\r\n    return;\r\n  }\r\n\r\n  container.innerHTML = certs\r\n    .sort((a, b) => a.certName.localeCompare(b.certName))\r\n    .map(renderCard)\r\n    .join(\"\");\r\n\r\n  console.log(\"Séries recebidas:\", getSeriesList().map(s => s.name));\r\n  console.log(\"Certificados montados:\", certs);\r\n}\r\n\r\nconsole.log(\"Séries recebidas:\", getSeriesList().map(s => s.name));\r\nrender();",
+        "overflow": "visible",
+        "panelupdateOnMount": true,
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull",
+            "last",
+            "firstNotNull",
+            "first",
+            "min",
+            "max",
+            "mean",
+            "sum",
+            "count",
+            "range",
+            "delta",
+            "step",
+            "diff",
+            "logmin",
+            "allIsZero",
+            "allIsNull",
+            "diffperc"
+          ]
+        },
+        "renderOnMount": true,
+        "rootCSS": "",
+        "useGrafanaScrollbar": true
+      },
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": true,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "3f2024.pfx -  Tempo desde emissão"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": true,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "3f2024.pfx - dias restantes do certificado"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": true,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "3f2024.pfx - Inicio da validade"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "2",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": true,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "3f2024.pfx - Fim da validade"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "2",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*). Fim da validade/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "2",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*).Tempo desde emissão/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*).Inicio da validade/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "2",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*).Tempo desde emissão/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*)dias restantes do certificado/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*).pfx - dias restantes do certificado/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        },
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ALEXANDERZOBNIN-ZABBIX-DATASOURCE}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/.*/"
+          },
+          "hide": false,
+          "host": {
+            "filter": "cert-monitor-local"
+          },
+          "item": {
+            "filter": "/(.*)Tipo/"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "2",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "organize",
+          "options": {}
+        },
+        {
+          "disabled": true,
+          "id": "renameByRegex",
+          "options": {
+            "regex": "",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "gapit-htmlgraphics-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Certificados"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true,
+    "refresh_intervals": [
+      "6h"
+    ]
+  },
+  "timezone": "",
+  "title": "CERTIFICADOS",
+  "uid": "ce97c640-edb0-44ee-8903-ded9ef1e1936",
+  "version": 3,
+  "weekStart": ""
+}
